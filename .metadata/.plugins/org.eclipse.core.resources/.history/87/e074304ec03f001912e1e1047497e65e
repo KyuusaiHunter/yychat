@@ -1,0 +1,21 @@
+package com.yychat.view;
+
+import javax.swing.*;
+
+public class Friendlist extends JFrame{//容器
+	//成员变量
+    JPanel myFriendPanel;
+    JButton myFriendButton;
+    JScrollPane myFriendListJScrollPane;
+    JPanel myFriendListJPanel;
+    public static final int MYFRIENDCOUNT=51;
+    JLabel[] myfriendJLabel=new JLabel[MYFRIENDCOUNT];//50好友数组，对参数组
+    
+    JPanel	myStrangerBlackListPanel;
+    JButton myStrangerButton;
+    JButton blackListButton;
+    
+    public  FriendList(){
+    	myfriendPanel
+    }
+}
