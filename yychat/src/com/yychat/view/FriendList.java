@@ -3,10 +3,13 @@ package com.yychat.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
 
 import javax.swing.*;
 
-public class FriendList extends JFrame implements ActionListener{//容器
+public class FriendList extends JFrame implements ActionListener,MouseListener {//容器
 
 	//成员变量
 	CardLayout cardLayout;
@@ -39,10 +42,12 @@ public class FriendList extends JFrame implements ActionListener{//容器
     //南部
     JButton blackListButton1;
 	
-    //第三张卡片
     
     
-    public  FriendList(){
+    String userName;//成员变量
+        
+    public  FriendList(String userName){//形参
+    	this.userName=userName;
     	//创建第一张卡片
     	myFriendPanel=new JPanel(new BorderLayout());//布局问题，边界布局
     	//System.out.println(myFriendPanel.getLayout());
@@ -55,6 +60,7 @@ public class FriendList extends JFrame implements ActionListener{//容器
     	myFriendListJPanel=new JPanel(new GridLayout(MYFRIENDCOUNT-1,1));//网格布局
     	for(int i=1;i<MYFRIENDCOUNT;i++){
 			myFriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/yy0.gif"),JLabel.LEFT);
+			myFriendJLabel[i].addMouseListener(this);
 			myFriendListJPanel.add(myFriendJLabel[i]);   
 		}
     	/*myFriendListJScrollPane=new JScrollPane();
@@ -106,13 +112,15 @@ public class FriendList extends JFrame implements ActionListener{//容器
     	
     	
     	this.setSize(150,500);
+    	this.setTitle(userName+"的好友列表");
+    	this.setIconImage(new ImageIcon("images/yy2.gif").getImage());
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	this.setLocationRelativeTo(null);
     	this.setVisible(true);
     }
     
     public static void main(String[] args){
-    	FriendList friendList=new FriendList();
+		//FriendList friendList=new FriendList("pdh");
     }
 
 	@Override
@@ -120,6 +128,45 @@ public class FriendList extends JFrame implements ActionListener{//容器
 		// TODO Auto-generated method stub
 		if(e.getSource()==myStrangerButton) cardLayout.show(this.getContentPane(),"2");
 		if(e.getSource()==myFriendButton1) cardLayout.show(this.getContentPane(),"1");
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if(arg0.getClickCount()==2){
+			JLabel jlbl=(JLabel)arg0.getSource();
+			String receiver=jlbl.getText();
+			new FriendChat(this.userName,receiver);
+		}
+		
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		JLabel jlbl1=(JLabel)arg0.getSource();
+		jlbl1.setForeground(Color.red);
+		
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		JLabel jlbl1=(JLabel)arg0.getSource();
+		jlbl1.setForeground(Color.BLACK);
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
     
