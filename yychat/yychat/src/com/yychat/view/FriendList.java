@@ -69,7 +69,7 @@ public class FriendList extends JFrame implements ActionListener,MouseListener {
 			myFriendListJPanel.add(myFriendJLabel[i]);   
 		}
     	//激活自己的图标
-    	myFriendJLabel[Integer.parseInt(userName)].setEnabled(true);
+    	//myFriendJLabel[Integer.parseInt(userName)].setEnabled(true);
     	/*myFriendListJScrollPane=new JScrollPane();
     	myFriendListJScrollPane.add(myFriendListJPanel);*/
     	myFriendListJScrollPane=new JScrollPane(myFriendListJPanel);
@@ -128,6 +128,25 @@ public class FriendList extends JFrame implements ActionListener,MouseListener {
     
     public static void main(String[] args){
 		//FriendList friendList=new FriendList("pdh");
+    }
+    
+    public void setEnabledNewOnlineFriend(String newonlineFriend){
+    	myFriendJLabel[Integer.parseInt(newonlineFriend)].setEnabled(true);
+    }
+    
+    public void setEnabledOnlineFriend(String onlineFriend){
+    	//激活在线好友图标 
+    	String[] friendName=onlineFriend.split(" ");
+    	//System.out.println("friendName数组中的第一个元素："+friendName[0]);
+    	int count=friendName.length;
+    	
+    	System.out.println("friendName数组中的元素个数："+count);
+    	for(int i=1;i<count;i++){
+    		System.out.println("friendName数组中的第"+i+"元素:"+friendName[i]);
+    		myFriendJLabel[Integer.parseInt(friendName[i])].setEnabled(true);
+    	}
+    	
+    	
     }
 
 	@Override

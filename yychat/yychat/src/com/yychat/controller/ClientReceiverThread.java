@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import com.yychat.model.Message;
+import com.yychat.view.ClientLogin;
 import com.yychat.view.FriendChat1;
 import com.yychat.view.FriendList;
 
@@ -36,7 +37,18 @@ public class ClientReceiverThread extends Thread{
 				
 				//第3步接收到服务器发送来的在线好友信息，激活对应图标
 				if(mess.getMessageType().equals(Message.message_OnlineFriend)){
-					
+					System.out.println("在线好友："+mess.getContent());
+					//怎么去激活对应的图标？
+					//首先要拿到FriendList对象?
+					FriendList friendList=(FriendList)ClientLogin.hmFriendList.get(mess.getReceiver());
+					friendList.setEnabledOnlineFriend(mess.getContent());
+				}
+				//激活新上线好友的图标步骤2、其他用户利用收到的该消息更新图标
+				if(mess.getMessageType().equals(Message.message_NewOnlineFriend)){
+					System.out.println("新上线用户的名字是："+mess.getContent());
+					FriendList friendList=(FriendList)ClientLogin.hmFriendList.get(mess.getReceiver());
+					//friendList.setEnabledOnlineFriend(mess.getContent());
+					friendList.setEnabledNewOnlineFriend(mess.getContent());
 				}
 				
 				
